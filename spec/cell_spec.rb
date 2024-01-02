@@ -5,6 +5,7 @@ require 'pry'
 RSpec.describe Cell do
     before(:each) do
       @cell = Cell.new("B4")
+      @cruiser = Ship.new("Cruiser", 3)
   
     end
     describe 'initialize cell' do
@@ -23,5 +24,13 @@ RSpec.describe Cell do
       it 'defaults to being empty' do
         expect(@cell.empty?).to eq (true)
       end
+    end
+
+    describe '#place_ship' do
+        it 'places a ship on the cell' do
+            @cell.place_ship(@cruiser)
+
+            expect(@cell.ship).to eq (@cruiser)
+        end
     end
 end
