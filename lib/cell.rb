@@ -16,6 +16,7 @@ class Cell
 
     def place_ship(ship)
         @ship = ship
+        @empty = false
     end
 
     def fired_upon?
@@ -23,10 +24,21 @@ class Cell
     end
 
     def fire_upon
-        @ship.hit
+        @ship.hit if @ship != nil
         @fired_upon = true
     end
 
-    def render
+    def render(value = false)
+        if fired_upon? == false
+          puts  "."
+        elsif fired_upon? == true && @ship.nil?
+            puts "M"
+        elsif fired_upon? == true && @ship != nil
+            puts "H"
+        elsif fired_upon? == true && @ship.sunk? == true
+            puts "X"
+        elsif value == true && fired_upon? == false && @ship != nil
+            puts "S"
+        end
     end
 end
