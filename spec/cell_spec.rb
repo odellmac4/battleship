@@ -5,7 +5,7 @@ require 'pry'
 RSpec.describe Cell do
     before(:each) do
       @cell = Cell.new("B4")
-    #   @cruiser = Ship.new("Cruiser", 3)
+      @cruiser = Ship.new("Cruiser", 3)
   
     end
     describe 'initialize cell' do
@@ -27,7 +27,7 @@ RSpec.describe Cell do
     end
 
     describe '#place_ship' do
-        xit 'places a ship on the cell' do
+        it 'places a ship on the cell' do
             @cell.place_ship(@cruiser)
 
             expect(@cell.ship).to eq (@cruiser)
@@ -39,7 +39,8 @@ RSpec.describe Cell do
             expect(@cell.fired_upon?).to eq (false)
         end
 
-        xit 'can be fired upon' do
+        it 'can be fired upon' do
+            @cell.place_ship(@cruiser)
             @cell.fire_upon
 
             expect(@cell.ship.health).to eq (2)
