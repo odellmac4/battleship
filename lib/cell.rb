@@ -29,16 +29,16 @@ class Cell
     end
 
     def render(value = false)
-        if fired_upon? == false
-          puts  "."
+        if value == true && fired_upon? == false && @ship != nil
+            "S"
+        elsif fired_upon? == false
+             "."
         elsif fired_upon? == true && @ship.nil?
-            puts "M"
-        elsif fired_upon? == true && @ship != nil
-            puts "H"
+             "M"
+        elsif fired_upon? == true && @ship.sunk? == false
+             "H"
         elsif fired_upon? == true && @ship.sunk? == true
-            puts "X"
-        elsif value == true && fired_upon? == false && @ship != nil
-            puts "S"
+             "X"
         end
     end
 end

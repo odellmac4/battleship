@@ -73,6 +73,13 @@ RSpec.describe Cell do
       expect(@cell_2.render).to eq (".")
       expect(@cell_2.render(true)).to eq ("S")
 
+      @cell_2.fire_upon
+      @cell_2.fire_upon
+      @cell_2.fire_upon
+      
+      expect(@cruiser.sunk?).to eq (true)
+      expect(@cell_2.render).to eq ("X")
+
     end
   end
 end
