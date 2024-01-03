@@ -1,5 +1,7 @@
 class Board
-    @cells = [
+
+    def cells
+        cells = [
         {coordinate: "A1"},
         {coordinate: "A2"},
         {coordinate: "A3"},
@@ -16,19 +18,14 @@ class Board
         {coordinate: "D2"},
         {coordinate: "D3"},
         {coordinate: "D4"}
-    ]
-    
-    require'pry';binding.pry
+        ]
 
-    all_cells = Cell.create_multiple_cells(@cells)
-
-    # def cells
-        
-        #     # all_cells = [cell , cell]
-        # cells_hash = {}
-        # all_cells.each do |cell|
-        #     cells_hash[cell.coordinate]
-        # end
-    # end
+        all_cells = Cell.create_multiple_cells(cells)
+        cells_hash = {}
+        all_cells.each do |cell|
+            cells_hash[cell.coordinate] = cell
+        end
+        cells_hash
+    end
     
 end
