@@ -26,4 +26,7 @@ class Cell
         @ship.hit
         @fired_upon = true
     end
+
+    def render
+    end
 end
