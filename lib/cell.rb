@@ -41,4 +41,10 @@ class Cell
              "X"
         end
     end
+
+    def self.create_multiple_cells(cells)
+        cells.map do |cell|
+            new_cell = Cell.new(cell[:coordinate])
+        end
+    end
 end

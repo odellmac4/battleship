@@ -82,4 +82,19 @@ RSpec.describe Cell do
 
     end
   end
+
+  describe 'create multiple cells' do
+    it 'can  multiply' do
+      cells = [
+        {coordinate: "A1"},
+        {coordinate: "A2"},
+        {coordinate: "A3"}
+      ]
+      
+      created_cells = Cell.create_multiple_cells(cells)
+      expect(created_cells).to be_a Array
+      expect(created_cells.length).to eq (3)
+      # binding.pry
+    end
+  end
 end
