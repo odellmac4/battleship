@@ -94,7 +94,6 @@ RSpec.describe Cell do
       created_cells = Cell.create_multiple_cells(cells)
       expect(created_cells).to be_a Array
       expect(created_cells.length).to eq (3)
-      # binding.pry
     end
   end
 end
