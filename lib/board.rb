@@ -42,7 +42,17 @@ class Board
 
     
 
-    def valid_placement?()
+    def valid_placement?(ship, coordinates)
+        if ship.length == coordinates.length && coordinates.sort{ |a, b| a <=> b }
+            # arr.sort { |a, b| a <=> b }
+            true
+            # Syntax: .each_cons(N) { |obj| block }
+
+            
+
+            
+        end
+
     end
     
 end
