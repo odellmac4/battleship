@@ -6,6 +6,10 @@ RSpec.describe Board do
     before(:each) do
         @board = Board.new
         @cell = Cell.new("B4")
+        @cell_2 = Cell.new("C3")
+        @cruiser = Ship.new("Cruiser", 3)
+        @submarine = Ship.new("Submarine", 2)
+
     end
     describe 'board' do
       it 'is a board' do
@@ -23,5 +27,31 @@ RSpec.describe Board do
 
         expect(board_of_cells.count).to eq (16)
       end
+   end
+
+    describe "validate" do
+
+      it "can validate a cell" do
+        cells = [
+        {coordinate: "A1"},
+        {coordinate: "A2"},
+        {coordinate: "A3"}
+      ]
+      created_cells = Cell.create_multiple_cells(cells)
+      @board.cells
+      
+      expect(@board.cells).to be_an_instance_of(Hash)
+
+      expect(@board.valid_coordinate?("A1")).to be true
+      
+      end
+
+      it "can validate ship placement" do
+        expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq true
+        expect(@board.valid_placement?(@submarine,["A1"])).to eq false
+      end
     end
+
+
+
 end
