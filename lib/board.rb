@@ -27,5 +27,22 @@ class Board
         end
         cells_hash
     end
+
+    def valid_coordinate?(coordinate)
+        cells_validation_array = []
+       cells.each do |key, value|
+        cells_validation_array << key
+       end
+       
+        # require 'pry'; binding.pry
+        cells_validation_array.include?(coordinate)
+            # coordinate == coordinate
+        # end
+    end
+
+    
+
+    def valid_placement?()
+    end
     
 end
