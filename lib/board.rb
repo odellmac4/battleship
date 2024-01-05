@@ -19,14 +19,19 @@ class Board
         {coordinate: "D3"},
         {coordinate: "D4"}
         ]
+      
 
         all_cells = Cell.create_multiple_cells(cells)
         cells_hash = {}
         all_cells.each do |cell|
             cells_hash[cell.coordinate] = cell
+            
         end
         cells_hash
+      
     end
+    
+    
 
     def valid_coordinate?(coordinate)
         cells_validation_array = []
@@ -40,19 +45,26 @@ class Board
         # end
     end
 
+    # def valid_horizontal
+    #     cells.keys
+    #     # require 'pry'; binding.pry
+    # end
+
     
 
     def valid_placement?(ship, coordinates)
-        if ship.length == coordinates.length && coordinates.sort{ |a, b| a <=> b }
+        ship.length == coordinates.length
             # arr.sort { |a, b| a <=> b }
-            true
-            # Syntax: .each_cons(N) { |obj| block }
+    #         true
+    #         # Syntax: .each_cons(N) { |obj| block }
 
-            
+    #         # range hash horizontal, range hash of arrays vertical x4 transcribed to numerical values to reference
 
-            
-        end
-
-    end
+    #         # {["a1", "a2"...]}
+        end  #         # {["a1", "b1"...]} transcribed to ord for numerical values, compare in sequence?
     
+            
+    #     end
+
 end
+    
