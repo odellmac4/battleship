@@ -46,7 +46,7 @@ RSpec.describe Board do
 
     it 'can validate ship placement by length' do
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq true
-      expect(@board.valid_placement?(@submarine, ['A1'])).to eq false
+      expect(@board.valid_placement?(@submarine, ["A1"])).to eq false
     end
 
     it 'can validate placement by checking consecutive coordinates' do

@@ -35,12 +35,11 @@ class Board
 
     def valid_coordinate?(coordinate)
         cells_validation_array = []
-       cells.each do |key, value|
+        cells.each do |key, value|
         cells_validation_array << key
        end
-       
+       cells_validation_array.include?(coordinate)
         # require 'pry'; binding.pry
-        cells_validation_array.include?(coordinate)
             # coordinate == coordinate
         # end
     end
@@ -53,18 +52,13 @@ class Board
     
 
     def valid_placement?(ship, coordinates)
-        ship.length == coordinates.length
-            # arr.sort { |a, b| a <=> b }
-    #         true
-    #         # Syntax: .each_cons(N) { |obj| block }
-
-    #         # range hash horizontal, range hash of arrays vertical x4 transcribed to numerical values to reference
-
-    #         # {["a1", "a2"...]}
-        end  #         # {["a1", "b1"...]} transcribed to ord for numerical values, compare in sequence?
-    
-            
-    #     end
+        if ship.length == coordinates.length && coordinates.sort{ |a, b| a <=> b }
+            true 
+        end
 
 end
     
+end
+
+# arr.sort { |a, b| a <=> b }
+# Syntax: .each_cons(N) { |obj| block }
