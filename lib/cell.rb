@@ -29,11 +29,11 @@ class Cell
     end
 
     def render(value = false)
-        if !value && !fired_upon? && @ship
+        if value == true && !fired_upon? && @ship
             "S"
         elsif !fired_upon?  
              "."
-        elsif fired_upon? && @ship
+        elsif fired_upon? && @ship.nil?
              "M"
         elsif fired_upon? && !@ship.sunk?
              "H"

@@ -19,14 +19,19 @@ class Board
         {coordinate: "D3"},
         {coordinate: "D4"}
         ]
+      
 
         all_cells = Cell.create_multiple_cells(cells)
         cells_hash = {}
         all_cells.each do |cell|
             cells_hash[cell.coordinate] = cell
+            
         end
         cells_hash
+      
     end
+    
+    
 
     def valid_coordinate?(coordinate)
         cells_validation_array = []
