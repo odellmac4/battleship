@@ -34,21 +34,25 @@ class Board
         cells_validation_array << key
        end
        cells_validation_array.include?(coordinate)
-        # require 'pry'; binding.pry
-            # coordinate == coordinate
-        # end
     end
 
+    def validate_length(ship , coordinates)
+        ship.length == coordinates.length
+        require'pry';binding.pry
+    end
     
+    def validate_order
+        row1 = cells.keys
+    end
 
     def valid_placement?(ship, coordinates)
-        if ship.length == coordinates.length && coordinates.sort{ |a, b| a <=> b }
-            true 
-        end
-
+        validate_length(ship , coordinates)
     end
     
 end
+
+#keys of the cells
+#first range to be A1..A4
 
 # arr.sort { |a, b| a <=> b }
 # Syntax: .each_cons(N) { |obj| block }

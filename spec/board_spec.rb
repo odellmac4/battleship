@@ -1,5 +1,6 @@
 require './lib/board'
 require './lib/cell'
+require './lib/ship'
 require 'pry'
 
 RSpec.describe Board do
@@ -54,6 +55,7 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq false
       expect(@board.valid_placement?(@submarine, ["C1", "B1"])).to eq false
       expect(@board.valid_placement?(@submarine, ["B1", "B2"])).to eq true
+      expect(@board.)
     end
   end
 end
