@@ -28,17 +28,11 @@ class Board
             
         end
         cells_hash
-    #   require'pry';binding.pry
     end
     
     
 
     def valid_coordinate?(coordinate)
-    #     cells_validation_array = []
-    #     cells.each do |key, value|
-    #     cells_validation_array << key
-    #    end
-    #    cells_validation_array.include?(coordinate)
         cells.key?(coordinate)
     end
 
@@ -46,35 +40,20 @@ class Board
         ship.length == coordinates.length
     end
     
-    
-    # def validate_horizontal(columns , rows , length)
-    #     # assign the row to the letters
-    #     # assign the column to the numbers
-        
-    # end
-    
     def valid_placement?(ship, coordinates)
-        rows = coordinates.map {|coordinate| coordinate[0]}
-        columns = coordinates.map {|coordinate| coordinate[1].to_i}
         
-        valid_length?(ship , coordinates)
-
+        if valid_length?(ship , coordinates) && ((row_valid?(coordinates)) && (column_consecutive?(coordinates)) || 
+            (row_consecutive?(coordinates)) && ((column_valid?(coordinates))))
+            true
+        else
+            false
+        end
         
-
-        # row_valid?(rows)
-        # column_valid?(columns)
-
-
-
-        # require'pry';binding.pry
     end
 
     def rows
         all_cells_keys = [
-            cells.keys[0..15],
-            # cells.keys[4..7],
-            # cells.keys[8..11],
-            # cells.keys[12..15]
+            cells.keys[0..15]
         ]
 
         separate_coord_chars = all_cells_keys.flat_map do |keys|
@@ -86,19 +65,12 @@ class Board
         end
 
         rows.uniq
-
-        
-
-        rows.uniq
         #["A","B","C","D"]
     end
-    # require'pry';binding.pry
+    
     def columns
         all_cells_keys = [
-            cells.keys[0..15],
-            # cells.keys[4..7],
-            # cells.keys[8..11],
-            # cells.keys[12..15]
+            cells.keys[0..15]
         ]
 
         separate_coord_chars = all_cells_keys.flat_map do |keys|
@@ -115,21 +87,26 @@ class Board
     end
 
     def row_valid?(coordinates)
-        rows = coordinates.map{|coordinate| coordinate[0]}
-        rows.uniq.length == 1
+        coord_letters_1 = coordinates.map{|coordinate| coordinate[0]}
+        coord_letters_1.uniq.length == 1
+    end
+
+    def column_valid?(coordinates)
+        coord_numbers_1 = coordinates.map{|coordinate| coordinate[1].to_i}
+        coord_numbers_1.uniq.length == 1
     end
 
     def column_consecutive?(coordinates)
-        columns = coordinates.map{|coordinate| coordinate[1].to_i}
-        columns.each_cons(2).all? {|a, b| a <= b}
-        # require'pry';binding.pry
+        coord_numbers_2 = coordinates.map{|coordinate| coordinate[1].to_i}
+        coord_numbers_2.each_cons(2).all? do |a, b| 
+            a.succ == b
+        end
     end
 
-    
+    def row_consecutive?(coordinates)
+        coord_letters_2 = coordinates.map {|coordinate| coordinate[0]}
+        coord_letters_2.each_cons(2).all? do|a, b| 
+            a.ord.succ == b.ord
+        end
+    end
 end
-
-#keys of the cells
-#first range to be A1..A4
-
-# arr.sort { |a, b| a <=> b }
-# Syntax: .each_cons(N) { |obj| block }

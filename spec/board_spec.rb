@@ -43,12 +43,6 @@ RSpec.describe Board do
       expect(@board.cells).to be_an_instance_of(Hash)
       expect(@board.valid_coordinate?('A1')).to be true
     end
-
-    it 'can validate ship placement by length' do
-      expect(@board.valid_length?(@cruiser, ["A1", "A2", "A3"])).to eq true
-      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq true
-      expect(@board.valid_placement?(@submarine, ["A1"])).to eq false
-    end
   end
 
   describe 'rows' do
@@ -61,6 +55,15 @@ RSpec.describe Board do
       expect(@board.row_valid?(["A1", "A2", "A3"])).to be true
       expect(@board.row_valid?(["A1", "B2", "C3"])).to be false
     end
+
+    it 'has consecutive rows/letters' do
+
+      coordinates = ["A1", "A2", "A3"]
+
+      expect(@board.row_consecutive?(["A1", "B1", "C1"])).to eq true
+      # require'pry';binding.pry
+      expect(@board.row_consecutive?(["A1", "A2", "A3"])).to eq false
+    end
     
   end
 
@@ -69,30 +72,37 @@ RSpec.describe Board do
       expect(@board.columns).to eq ([1, 2, 3, 4])
     end
 
-    it 'has the same column/number in each coordinate' do
+    it 'has the consecutive columns/numbers' do
 
       expect(@board.column_consecutive?(["A1", "A2", "A3"])).to be true
       expect(@board.column_consecutive?(["B3", "B4", "B1"])).to be false
       expect(@board.column_consecutive?(["C4", "C2", "C3"])).to be false
       
     end
-# require'pry';binding.pry
+
+    it 'has the same column/number in each coordinate' do
+      expect(@board.column_valid?(["A1", "B1", "C1"])).to eq true
+      expect(@board.column_valid?(["A1", "B3", "C4"])).to eq false
+    end
+  end
+
+  describe 'validates placement' do
+    it 'can validate ship placement by length' do
+      expect(@board.valid_length?(@cruiser, ["A1", "A2", "A3"])).to eq true
+      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq true
+      expect(@board.valid_placement?(@submarine, ["A1"])).to eq false
+    end
+
+    it 'validate ship placemnt consecutive rows and columns and same row and column' do
+        expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq false
+        expect(@board.valid_placement?(@submarine, ["B1", "B2"])).to eq true
+        expect(@board.valid_placement?(@submarine, ["C1", "C2" , "C3"])).to eq false
+        
+        expect(@board.valid_placement?(@submarine, ["A1", "C1"])).to eq false
+        expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq false
+        expect(@board.valid_placement?(@submarine, ["C1", "B1"])).to eq false
+        
+      end
   end
 end
 
-
-# it 'validate ship placemnt horizontally' do
-    #   expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq false
-    #   expect(@board.valid_placement?(@submarine, ["B1", "B2"])).to eq true
-    #   expect(@board.valid_placement?(@submarine, ["C1", "C2" , "C3"])).to eq true
-    # end
-
-    
-    
-    # it 'can validate placement by checking consecutive coordinates' do
-      
-    #   expect(@board.valid_placement?(@submarine, ["A1", "C1"])).to eq false
-    #   expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq false
-    #   expect(@board.valid_placement?(@submarine, ["C1", "B1"])).to eq false
-      
-    # end
