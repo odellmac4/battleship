@@ -47,7 +47,10 @@ class Board
     end
     
     def validate_order
-        row1 = cells.keys
+        row1 = cells.keys[0..3]
+        row2 = cells.keys[4..7]
+        row1 = cells.keys[8..11]
+        row1 = cells.keys[12..16]
     end
 
     def valid_placement?(ship, coordinates)
