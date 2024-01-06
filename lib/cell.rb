@@ -6,8 +6,12 @@ class Cell
     def initialize(coordinate)
         @coordinate = coordinate
         @ship = nil
+<<<<<<< HEAD
         @empty = true
+=======
+>>>>>>> 1628de996485bbdf9af3dc0e17e550294ef5dd3a
         @fired_upon = false
+        @empty = true
     end
 
     def empty?
@@ -24,14 +28,20 @@ class Cell
     end
 
     def fire_upon
-        @ship.hit if @ship != nil
+        @ship.hit if @ship !=nil
         @fired_upon = true
     end
 
     def render(value = false)
+<<<<<<< HEAD
         if value == true && !fired_upon? && @ship != nil
             "S"
         elsif !fired_upon?
+=======
+        if value == true && !fired_upon? && @ship
+            "S"
+        elsif !fired_upon?  
+>>>>>>> 1628de996485bbdf9af3dc0e17e550294ef5dd3a
              "."
         elsif fired_upon? && @ship.nil?
              "M"
