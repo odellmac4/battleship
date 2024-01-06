@@ -28,7 +28,7 @@ class Board
             
         end
         cells_hash
-      require'pry';binding.pry
+    #   require'pry';binding.pry
     end
     
     
@@ -42,9 +42,8 @@ class Board
         cells.key?(coordinate)
     end
 
-    def validate_length(ship , coordinates)
+    def valid_length?(ship , coordinates)
         ship.length == coordinates.length
-        # require'pry';binding.pry
     end
     
     
@@ -55,13 +54,15 @@ class Board
     # end
     
     def valid_placement?(ship, coordinates)
-        validate_length(ship , coordinates)
+        rows = coordinates.map {|coordinate| coordinate[0]}
+        columns = coordinates.map {|coordinate| coordinate[1].to_i}
+        
+        valid_length?(ship , coordinates)
 
-        columns = coordinates.map {|coordinate| coordinate[0]}
-        rows = coordinates.map {|coordinate| coordinate[1].to_i}
+        
 
-        row_valid?(rows)
-        column_valid?(columns)
+        # row_valid?(rows)
+        # column_valid?(columns)
 
 
 
@@ -69,53 +70,60 @@ class Board
     end
 
     def rows
-        all_rows = [
-            cells_hash.keys[0..3],
-            cells_hash.keys[4..7],
-            cells_hash.keys[8..11],
-            cells_hash.keys[12..15]
+        all_cells_keys = [
+            cells.keys[0..15],
+            # cells.keys[4..7],
+            # cells.keys[8..11],
+            # cells.keys[12..15]
         ]
 
-        separate_coord_chars = all_rows.flat_map do |row|
-            row.map{|coord| coord.split("")}
+        separate_coord_chars = all_cells_keys.flat_map do |keys|
+            keys.map{|coordinate| coordinate.split("")}
         end
 
-        row_assign = separate_coord_chars.map do |coord_pair|
-            coord_pair[0]
+        rows = separate_coord_chars.map do |coord_chars|
+            coord_chars[0]
         end
 
-        row_assign.uniq
-        #LETTERS
+        rows.uniq
+
+        
+
+        rows.uniq
+        #["A","B","C","D"]
     end
-
+    # require'pry';binding.pry
     def columns
-        all_columns = [
-            cells_hash.keys[0..3],
-            cells_hash.keys[4..7],
-            cells_hash.keys[8..11],
-            cells_hash.keys[12..15]
+        all_cells_keys = [
+            cells.keys[0..15],
+            # cells.keys[4..7],
+            # cells.keys[8..11],
+            # cells.keys[12..15]
         ]
 
-        separate_coord_chars = all_columns.flat_map do |column|
-            column.map{|coord| coord.split("")}
+        separate_coord_chars = all_cells_keys.flat_map do |keys|
+            keys.map{|coordinate| coordinate.split("")}
         end
 
-        column_assign = separate_coord_chars.map do |coord_pair|
-            coord_pair[1]
+        columns = separate_coord_chars.map do |coord_chars|
+            coord_chars[1]
         end
 
-        column_assign.uniq.map{|num| num.to_i}
+        columns.uniq.map{|num| num.to_i}
         #NUMBERS
+        [1, 2, 3, 4]
     end
 
-    def row_valid?(rows)
-        rows.length == 1
+    def row_valid?(coordinates)
+        rows = coordinates.map{|coordinate| coordinate[0]}
+        rows.uniq.length == 1
     end
 
-    def column_valid?(columns)
-        columns.length == 1
+    def column_consecutive?(coordinates)
+        columns = coordinates.map{|coordinate| coordinate[1].to_i}
+        columns.each_cons(2).all? {|a, b| a <= b}
+        # require'pry';binding.pry
     end
-
 
     
 end
