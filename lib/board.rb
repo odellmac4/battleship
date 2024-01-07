@@ -1,7 +1,7 @@
 class Board
     attr_reader :cells
     def initialize(cells)
-        @cells = create_cells
+        @cells = generate_cells
     end
 
     attr_reader :cells
