@@ -108,9 +108,14 @@ class Board
         coord_letters_2.each_cons(2).all? do|a, b| 
             a.ord.succ == b.ord
         end
+    end
 
     def place(ship, coordinates)
-        # cell << ship
+        coordinates.each do |coordinate|
+          cell = cells[coordinate]
+            
+          cell.place_ship(ship) if cell
         
+        end
     end
 end
