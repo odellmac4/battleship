@@ -109,4 +109,13 @@ class Board
             a.ord.succ == b.ord
         end
     end
+
+    def place(ship, coordinates)
+        coordinates.each do |coordinate|
+          cell = cells[coordinate]
+            
+          cell.place_ship(ship) 
+        
+        end
+    end
 end
