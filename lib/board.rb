@@ -51,21 +51,23 @@ class Board
         
     end
 
-    def rows
-        all_cells_keys = [
-            cells.keys[0..15]
-        ]
+    def rows(coordinates)
+        rows = coordinates.map{|coordinate| coordinate[0]}
+        # require 'pry'; binding.pry
+        # all_cells_keys = [
+        #     cells.keys[0..15]
+        # ]
 
-        separate_coord_chars = all_cells_keys.flat_map do |keys|
-            keys.map{|coordinate| coordinate.split("")}
-        end
+        # separate_coord_chars = all_cells_keys.flat_map do |keys|
+        #     keys.map{|coordinate| coordinate.split("")}
+        # end
 
-        rows = separate_coord_chars.map do |coord_chars|
-            coord_chars[0]
-        end
+        # rows = separate_coord_chars.map do |coord_chars|
+        #     coord_chars[0]
+        # end
 
         rows.uniq
-        #["A","B","C","D"]
+        # #["A","B","C","D"]
     end
     
     def columns
@@ -87,8 +89,8 @@ class Board
     end
 
     def row_valid?(coordinates)
-        coord_letters_1 = coordinates.map{|coordinate| coordinate[0]}
-        coord_letters_1.uniq.length == 1
+    
+        rows(coordinates).uniq.length == 1
     end
 
     def column_valid?(coordinates)
@@ -103,9 +105,9 @@ class Board
         end
     end
 
-    def row_consecutive?(coordinates)
-        coord_letters_2 = coordinates.map {|coordinate| coordinate[0]}
-        coord_letters_2.each_cons(2).all? do|a, b| 
+    def row_consecutive?(rows)
+
+        rows.each_cons(2).all? do|a, b| 
             a.ord.succ == b.ord
         end
     end
@@ -124,7 +126,7 @@ class Board
     def render(value = false)
         top_row = ' ' + columns.join(' ') + "\n"
         
-        board_rows = rows.map do |row|
+        board_rows = rows(coordinates).map do |row|
             row_cells = columns.map do |col|
             cells["#{row}#{col}"].render(value)
             end
