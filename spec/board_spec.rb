@@ -120,5 +120,14 @@ RSpec.describe Board do
       expect(cell_3.ship).to eq(@cruiser)
     end
   end
+
+  describe '#render' do 
+    it "can render a blank board" do
+      #  @board.place(cruiser, ["A1", "A2", "A3"])    
+      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+    #   @board.place(cruiser, ["A1", "A2", "A3"])
+    #   expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+  end
 end
 

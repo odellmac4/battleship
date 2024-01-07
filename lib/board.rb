@@ -111,11 +111,32 @@ class Board
     end
 
     def place(ship, coordinates)
-        coordinates.each do |coordinate|
+        if valid_placement?(ship, coordinates)
+            coordinates.each do |coordinate|
           cell = cells[coordinate]
             
           cell.place_ship(ship) 
         
+            end
         end
     end
+
+    def render(value = false)
+        top_row = ' ' + columns.join(' ') + "\n"
+        
+        board_rows = rows.map do |row|
+            row_cells = columns.map do |col|
+            cells["#{row}#{col}"].render(value)
+            end
+            "#{row} " + row_cells.join(' ') + "\n"
+            # require 'pry': binding.pry
+        end
+    
+        top_row + board_rows.join
+      
+    end
+
+                
+                    
+        
 end
