@@ -106,7 +106,7 @@ RSpec.describe Board do
   end
 
   describe '#place' do
-    xit 'places a ship on the board and associates cells with the ship' do
+    it 'places a ship on the board and associates cells with the ship' do
       
       @board.place(@cruiser, ["A1", "A2", "A3"])
 

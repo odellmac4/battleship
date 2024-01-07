@@ -1,6 +1,12 @@
 class Board
 
-    def cells
+    attr_reader :cells
+
+    def initialize
+        @cells = generate_cells
+    end
+    
+    def generate_cells
         cells = [
         {coordinate: "A1"},
         {coordinate: "A2"},
@@ -33,7 +39,7 @@ class Board
     
 
     def valid_coordinate?(coordinate)
-        cells.key?(coordinate)
+        @cells.key?(coordinate)
     end
 
     def valid_length?(ship , coordinates)
@@ -88,9 +94,7 @@ class Board
     def place(ship, coordinates)
         if valid_placement?(ship, coordinates)
             coordinates.each do |coordinate|
-          cell = cells[coordinate]
-            
-          cell.place_ship(ship) 
+          @cells[coordinate].place_ship(ship) 
         
             end
         end
@@ -100,7 +104,7 @@ class Board
         top_row = ' ' + columns.join(' ') + "\n"
         
         board_rows = rows(coordinates).map do |row|
-            row_cells = columns.map do |col|
+            row_cells = columns(coordinates).map do |col|
             cells["#{row}#{col}"].render(value)
             end
             "#{row} " + row_cells.join(' ') + "\n"
