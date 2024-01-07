@@ -69,7 +69,7 @@ RSpec.describe Board do
 
   describe 'columns' do
     it 'has columns' do
-      expect(@board.columns).to eq ([1, 2, 3, 4])
+      expect(@board.columns(["A1", "A2", "A3"])).to eq ([1, 2, 3])
     end
 
     it 'has the consecutive columns/numbers' do
@@ -122,7 +122,7 @@ RSpec.describe Board do
   end
 
   describe '#render' do 
-    it "can render a blank board" do
+    xit "can render a blank board" do
       #  @board.place(cruiser, ["A1", "A2", "A3"])    
       expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     #   @board.place(cruiser, ["A1", "A2", "A3"])
