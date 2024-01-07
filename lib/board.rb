@@ -1,6 +1,10 @@
 class Board
+    attr_reader :cells
+    def initialize(cells)
+        @cells = create_cells
+    end
 
-    def cells
+    def create_cells
         cells = [
         {coordinate: "A1"},
         {coordinate: "A2"},
